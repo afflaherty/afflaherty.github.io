@@ -259,7 +259,7 @@ form {
 nav
 {
 	position: center;
-	background-color: black;
+	background-color: #212121;
 	text-align: center;
 	-webkit-box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
 	-moz-box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
