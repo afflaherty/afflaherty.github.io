@@ -256,6 +256,47 @@ form {
   padding: 20px;
 }
 
+nav
+{
+	background-color: black;
+	text-align: left;
+	-webkit-box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
+	-moz-box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
+	box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
+}
+
+nav ul
+{
+	list-style: none;
+	margin: 1px;
+	padding-left: 5px;
+}
+
+nav li
+{
+	display: inline-block;
+	text-align: center;
+}
+
+nav ul li
+{
+	position: relative;
+}
+
+nav ul li a
+{
+	display: block;
+	text-decoration: none;
+	color: red;
+	padding: 10px 25px;
+	box-shadow: inset -1px 0px gray;
+}
+
+nav ul li:hover
+{
+	background-color: black;
+}
+
 /*******************************************************************************
 Full-Width Styles
 *******************************************************************************/
