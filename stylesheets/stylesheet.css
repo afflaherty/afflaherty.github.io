@@ -260,7 +260,7 @@ nav
 {
 	position: center;
 	background-color: black;
-	text-align: left;
+	text-align: center;
 	-webkit-box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
 	-moz-box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
 	box-shadow: inset 0px 10px 29px 0px rgba(117,116,117,1);
@@ -290,7 +290,6 @@ nav ul li a
 	text-decoration: none;
 	color: white;
 	padding: 10px 25px;
-	box-shadow: inset -1px 0px gray;
 }
 
 nav ul li:hover
