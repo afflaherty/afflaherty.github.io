@@ -47,7 +47,7 @@
 <code>adjective = StringSplit[ToString[Import[
 "\Users\owner\Documents\MATLAB\MASTERS\Parts of Speech\adjective.txt"]], \
 {Whitespace}];</code>
-
+<br>
 <code>AdjectiveList =
 Flatten[Table[Intersection[{stringlist[[i]]}, adjective], {i, Length[stringlist]}]]
 Length[AdjectiveList]</code>
@@ -59,7 +59,7 @@ cor(d)
 eigen(cor(d))
 plot(eigen(cor(d))$values)
 factanal(d, factors=2)</code>
-
+<br>
 <code>tmp1=numeric(30)
 for(i in 1:30){
 tmp1[i]=sum(d[i,]*matrix(loadings(m)[,1],ncol=1))}</code>
