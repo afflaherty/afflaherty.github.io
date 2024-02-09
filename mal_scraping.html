@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="description" content="Afflaherty.GitHub.io : ">
+  <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <title>Adam Flaherty's Portfolio</title>
+  
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+    <header class="inner">
+      <!--<a id="forkme_banner" href="https://github.com/afflaherty">View on GitHub</a>-->
+      <h1 id="project_title">Adam Flaherty's Portfolio</h1>
+      <h2 id="project_tagline">A Project Showcase</h2>
+    </header>
+  </div>
+  <!-- MAIN CONTENT -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="files/Adam%20Flaherty%20-%20Resume.pdf" target="_blank">Resume/CV</a></li>
+      <li><a href="java_program.html">Eternal Quest (Java)</a></li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">Analysis</button>
+          <div class="dropdownMenu">
+            <a href="master_project.html">Poetic Variation (Master's Project)</a>
+            <a href="mal_scraping.html">Scraping MAL (Personal Project)</a>
+            <a href="distant_worlds.html">Distant Worlds (Personal Project)</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      <h2>Scraping MAL - Collecting Data</h2>
+      <p>Like many people, I like to unwind on my downtime by sitting down and watching something. In my case, what I like to watch is anime as I have a great appreciation for animation and I have stumbled upon many great stories purely by accident that simply were not available through western animation at the time. I have recently decided to apply my passion for programming towards my hobby and collect data from <a href="https://myanimelist.net/" target="_blank">MyAnimeList</a> regarding aggregated user scores and how that may apply to genre and release date. This project is a work in progress and I will touch upon points marked for improvement as I continue to work on it.</p>
+      <h3>The Code</h3>
+      <p>The code itself started as a quick Python script to quickly collect data from a website in my professional career. Proud of what I accomplished, I did not want to abandon the script as a one-off tool. Instead, I started thinking how to expand the script to cover an entire domain rather than a single URL as well as what kind of data I wanted to collect and how to store it. For those answers, I chose data pertaining to anime and to store the data in an <abbr title="Microsoft">MS</abbr> Excel spreadsheet. Through no particular reason, I then chose MyAnimeList as the target for my data harvesting.</p>
+      <p>The beginning of the code sets up the libraries I needed to use in order to allow the program to access the <abbr title="MyAnimeList">MAL</abbr> domain, read and write to an Excel file, and datetime to check the runtime of the program, which begins in the line directly after the imports. After that, I set a variable for the general domain, open the file to write the data to, the sheets I will be using, and a Library of genres <abbr>MAL</abbr> uses to link each one to a column in the Excel sheet. I use three sheets in this program, having begun my focus on just television series which will be logged in Sheet 1. In Sheet 2, I keep track of non-television series titles for future reference when I decide to gather data on those. In Sheet 3, I log all of the URL paths that do not have an attributed entry so if I need to rerun the program, I can skip those entries to save time.</p>
+      <details>
+        <summary class="collapseButton">Initialization of Global Elements</summary>
+        <div class="collapseContent"><pre><code>from lxml import html
+import requests
+import openpyxl
+import time
+from pathlib import Path
+from datetime import datetime
+
+start = datetime.now()
+mal = "https://myanimelist.net/anime/"
+wb_obj = openpyxl.load_workbook("animemal.xlsx")
+tvSheet = wb_obj["Sheet1"]
+otherSheet = wb_obj["Sheet2"]
+missingSheet = wb_obj["Sheet3"]
+# readSheet = wb_obj["Sheet2"]
+genreMaster = {"Action": "H",
+    "Adventure": "I",
+    "Avant Garde": "J",
+    "Award Winning": "K",
+    "Boys Love": "L",
+    "Comedy": "M",
+    "Drama": "N",
+    "Ecchi": "O",
+    "Erotica": "p",
+    "Fantasy": "Q",
+    "Girls Love": "R",
+    "Gourmet": "S",
+    "Hentai": "T",
+    "Horror": "U",
+    "Mystery": "V",
+    "Romance": "W",
+    "Sci-Fi": "X",
+    "Slice of Life": "Y",
+    "Sports": "Z",
+    "Supernatural": "AA",
+    "Suspense": "AB"
+}</code></pre></div>
+      </details>
+      <p>After the initial setup, I then define a number of functions to pull specific information. This information includes Title, Media Format, Airing Season, User Score, Genre(s), and the number of episodes for the entry. Each function takes in the element tree taken from the specific URL, which will be detailed in later code, and uses xpath to target the element the function based on <abbr>MAL</abbr>'s pattern for marking up their entries. The pattern is not absolute as most of the functions require a try/except statement to bypass some idiosyncrasy. For instance, some titles do not have a defined season, so the pullSeason function has an exception to return "unknown" when it cannot find the season markup pattern.</p>
+      <details>
+        <summary class="collapseButton">Code for Defined Functions</summary>
+        <div class="collapseContent"><pre><code># Targets h1 containing title
+# Returns title as String
+def pullTitle(tree):
+    try:
+        grabTitle = tree.xpath("//h1[@class='title-name h1_bold_none']/strong/text()")[0]
+    except:
+        grabTitle = tree.xpath("//div//h1[@class='h1']/text()")[0]
+    return grabTitle
+
+# Targets the media format
+# Returns String
+def pullFormat(tree):
+    try:
+        grabFormat = tree.xpath("//div[@class='information-block di-ib clearfix']/span[@class='information type']/a/text()")[0]
+    except:
+        grabFormat = tree.xpath("//div[@class='information-block di-ib clearfix']/span[@class='information type']/text()")[0]
+    return grabFormat
+
+
+# Targets the season aired. For MAL, this applies only to TV format
+# Returns season as String and year as Int
+def pullSeason(tree):
+    try:
+        rawSeason = tree.xpath("//div[@class='information-block di-ib clearfix']/span[@class='information season']/a/text()")
+        splitSeason = rawSeason[0].split(" ")
+        grabSeason = splitSeason[0]
+        grabYear = splitSeason[1]
+    except:
+        grabSeason = "Unknown"
+        grabYear = "Unknown"
+    return(grabSeason, grabYear)
+
+# Targets score
+# Returns float
+def pullScore(tree):
+    grabScore = tree.xpath("//div[contains(@class, 'score-label')]/text()")[0]
+    return(grabScore)
+
+# Pulls genres and themes associated with title
+# Returns one lists; genre
+# Theme commented out as it is not yet utilized
+def pullGenre(tree):
+    grabGenre = tree.xpath("//div[span[contains(text(), 'Genres')]]/span[@itemprop='genre']/text()")
+    # grabTheme = tree.xpath("//div[span[contains(text(), 'Themes')]]/span[@itemprop='genre']/text()")
+    return(grabGenre)
+    # return(grabGenre, grabTheme)
+
+# Pulls the number of episodes for series
+# Returns Int
+def pullEps(tree):
+    grabEps = tree.xpath("//div[@class='spaceit_pad']/span[contains(text(), 'Episodes')]/../text()")[1].lstrip().rstrip()
+    return(grabEps)</code></pre></div>
+      </details>
+      <p>There are three functions I include in the main loops of the program. The first function, beginWrite(), initializes the iteration variables to beginning values in case I needed to reinitialize the whole program without any ambiguity. The second function, appendSheet(), was written to pick up at the last entry logged in the Excel file. There is some failsafe code included in case one of the sheets does not have any entries that it will initialize to the correct value, particulary j and k so they do not overwrite the header cells in their respective sheets. The last function, pullAll(i, j, k, m), takes in the iteration variables as defined by one of the two previous functions and begins scraping.</p>
+      <p>At the time when I ran this, I hardcoded a ceiling value into the function to stop when it hit a certain amount of entries. This was to keep the program running indefinitely as I did not have a reference for what the last valid ID was. As the function iterated through each ID, it began by pulling the element tree from the ID's URL and grabbed the title. If the title returned "404 Not Found", the ID was added to the missing ID list and the program moved on. For positive hits, it then grabbed the media format and the score of the title. Depending on the media format, it would either utilize all of the pull functions from earlier and fill out Sheet 1 if it were a TV series or it would take the information already acquired and write it to Sheet 2. Every 25 entries would write the ID and Title to console so I could keep track of progress. Finally, it save the Excel file, iterate the ID, and wait 2 seconds to prevent web security flagging the program as a DDOS attack.</p>
+      <details>
+        <summary class="collapseButton">The Main Loops</summary>
+        <div class="collapseContent"><pre><code># Starts document from scratch
+# Pulls records from AnimeNewsNetwork beginning with id=1
+def beginWrite():
+    # i is used to denote the current ID
+    i = 1
+    # j is used to denote the current Excel row for Sheet 1
+    j = 2
+    # j is used to denote the current Excel row for Sheet 2
+    k = 2
+    # j is used to denote the current Excel row for Missing ID file
+    m = 1
+    pullAll(i, j, k , m)
+
+# Appends the sheet with additional data beginning from largest ID
+def appendSheet():
+    currentRow = tvSheet.max_row
+    otherRow = otherSheet.max_row
+    missingRow = missingSheet.max_row
+    currentID = tvSheet["A" + str(currentRow)].value
+    j = currentRow + 1
+    k = otherRow + 1
+    if not missingSheet["A1"].value:
+        m = 1
+    else:
+        m = missingRow + 1
+    if isinstance(currentID, int):
+        otherID = otherSheet["A" + str(otherRow)].value
+        missingID = missingSheet["A" + str(missingRow)].value
+        idTemp = max([currentID, otherID, missingID])
+        i = idTemp + 1
+    else:
+        i = 1
+    print(str(i) + " " + str(j) + " " + str(k) + " " + str(m))
+    pullAll(i, j, k, m)
+
+#Main loop, used in multiple defs
+def pullAll(i, j, k, m):
+    ceiling = i + 4000
+    while i < ceiling:
+        malTree = html.fromstring(requests.get(mal + str(i)).content)
+        grabTitle = pullTitle(malTree)
+        if grabTitle == "404 Not Found":
+            missingSheet["A" + str(m)] = i
+            m = m + 1
+            i = i + 1
+            wb_obj.save("animemal.xlsx")
+            time.sleep(2)
+            continue
+        grabFormat = pullFormat(malTree)
+        grabScore = pullScore(malTree)
+        if grabFormat == "TV":
+            grabEps = pullEps(malTree)
+            grabSeason = pullSeason(malTree)
+            # grabAir = pullAir(malTree)
+            grabGenre = pullGenre(malTree)
+            tvSheet["A" + str(j)] = i
+            tvSheet["B" + str(j)] = grabTitle
+            tvSheet["C" + str(j)] = grabFormat
+            tvSheet["D" + str(j)] = pullEps(malTree)
+            tvSheet["E" + str(j)] = pullSeason(malTree)[0]
+            tvSheet["F" + str(j)] = pullSeason(malTree)[1]
+            tvSheet["G" + str(j)] = grabScore
+            for g in grabGenre:
+                tvSheet[genreMaster[g] + str(j)] = "true"
+            j = j + 1
+        else:
+            otherSheet["A" + str(k)] = i
+            otherSheet["B" + str(k)] = grabTitle
+            otherSheet["C" + str(k)] = grabFormat
+            otherSheet["D" + str(k)] = grabScore
+            k = k + 1
+        if i % 25 == 0:
+            print(str(i) + ": " + grabTitle)
+        wb_obj.save("animemal.xlsx")
+        i = i + 1
+        time.sleep(2)</code></pre></div>
+      </details>
+      <p>The last few lines of code are mostly administrative stuff. Aside from running the main loop, either appendSheet() or beginWrite(), it marks the end time, writes the begin and end times to console and succinctly announces the completion of the program.</p>
+      <details>
+        <summary class="collapseButton">The Wrap Up</summary>
+        <div class="collapseContent"><pre><code>print("Program Start: " + str(start))
+# beginWrite()
+appendSheet()
+end = datetime.now()
+print("Program Start: " + str(start))
+print("Program End: " + str(end))
+print("Done")</code></pre></div>
+      </details>
+    </section>
+  </div>
+  <!-- FOOTER  -->
+  <div id="footer_wrap" class="outer">
+    <footer class="inner">
+      <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+  </div>
+</body>
+
+</html>

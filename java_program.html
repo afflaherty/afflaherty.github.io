@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="description" content="Afflaherty.GitHub.io : ">
+  <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <title>Adam Flaherty's Portfolio</title>
+  
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+    <header class="inner">
+      <!--<a id="forkme_banner" href="https://github.com/afflaherty">View on GitHub</a>-->
+      <h1 id="project_title">Adam Flaherty's Portfolio</h1>
+      <h2 id="project_tagline">A Project Showcase</h2>
+    </header>
+  </div>
+  <!-- MAIN CONTENT -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="files/Adam%20Flaherty%20-%20Resume.pdf" target="_blank">R&#x00E9;sum&#x00E9;/CV</a></li>
+      <li><a href="java_program.html">Eternal Quest (Java)</a></li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">Analysis</button>
+          <div class="dropdownMenu">
+            <a href="master_project.html">Poetic Variation (Master's Project)</a>
+            <a href="mal_scraping.html">Scraping MAL (Personal Project)</a>
+            <a href="distant_worlds.html">Distant Worlds (Personal Project)</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      <h2>Eternal Quest - A Java Project</h2>
+      <p>Made as a final project for a Java-based class, Eternal Quest utilizes several topics covered in the course. Such topics include a user interface, interface classes, and action listeners. To play the game, you can download <a download="files/Eternal_Quest.zip">Eternal Quest</a>.</p>
+      <details>
+        <summary class="collapseButton">Java Code for Character Creation UI</summary>
+        <div class="collapseContent"><pre><code>import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+
+public class CharacterUI extends JFrame implements ActionListener
+{
+  private static final long serialVersionUID = 1L;
+  private SetStats stat;
+  
+  private JLabel label;
+  private JTextField nameField;
+  private JLabel statField;
+  private JButton generate;
+  private JButton confirm;
+  int genCount = 5;
+  
+  public CharacterUI(SetStats ss)
+  {
+    stat = ss;
+    init();
+  }
+  
+  public void init()
+  {
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    Container frame = getContentPane();
+    this.setTitle("Eternal Quest");
+    frame.setPreferredSize(new Dimension(200,185));
+    setLayout(new BoxLayout(frame, BoxLayout.Y_AXIS));
+    
+    label = new JLabel("Name:");
+    nameField = new JTextField(20);
+    statField = new JLabel("&lt;html&gt;Name: &lt;br&gt;
+                            HP: &lt;br&gt;
+                            Atk: &lt;br&gt;
+                            Def: &lt;br&gt;
+                            Hit: &lt;br&gt;
+                            Dodge:&lt;/html&gt;");
+    generate = new JButton("Generate ("+genCount+")");
+    confirm = new JButton("Create Character");
+    
+    frame.add(label);
+    frame.add(nameField);
+    frame.add(statField);
+    frame.add(generate);
+    generate.addActionListener(this);
+    frame.add(confirm);
+    confirm.addActionListener(this);
+    confirm.setEnabled(false);
+    
+    pack();
+    setVisible(true);
+  }
+  
+  @Override
+  public void actionPerformed(ActionEvent click)
+  {
+    if(click.getSource()==generate)
+    {
+      if(genCount<=1)
+      {
+        generate.setText("Generate");
+        generate.setEnabled(false);
+        nameField.setEnabled(false);
+      }
+      else
+      {
+        stat.setName(nameField.getText());
+        stat.setHp();
+        stat.setAtk();
+        stat.setDef();
+        stat.setHit();
+        stat.setDodge();
+        statField.setText("&lt;html&gt;Name: "+stat.getName()+"&lt;br&gt;
+                           HP: "+stat.getHp()+"&lt;br&gt;
+                           Atk: "+stat.getAtk()+"&lt;br&gt;
+                           Def: "+stat.getDef()+"&lt;br&gt;
+                           Hit: "+stat.getHit()+"&lt;br&gt;
+                           Dodge: "+stat.getDodge()+"&lt;/html&gt;");
+        
+        genCount=genCount-1;
+        generate.setText("Generate ("+genCount+")");
+        confirm.setEnabled(true);
+      }
+    }
+    else
+    {
+      Character you = new Character(stat.getName(),
+                                    stat.getHp(),
+                                    stat.getAtk(),
+                                    stat.getDef(),
+                                    stat.getHit(),
+                                    stat.getDodge());
+      AdventureUI aUI = new AdventureUI(you);
+      this.dispose();
+    }
+    
+  } 
+  
+  public static void main(String[] args)
+  {
+    SwingUtilities.invokeLater(new Runnable()
+    {
+      public void run()
+      {
+        SetStats stat = new SetStats();
+        new CharacterUI(stat);
+      }
+    });
+  }
+
+
+}</code></pre></div>
+      </details>
+      <div align="center">
+        <img src="images/rpg_create.PNG" width=213px>
+        <img src="images/rpg_open.PNG" width=250px>
+        <img src="images/rpg_battle.PNG" width=314px>
+      </div>
+    </section>
+  </div>
+  <!-- FOOTER  -->
+  <div id="footer_wrap" class="outer">
+    <footer class="inner">
+      <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+  </div>
+</body>
+
+</html>

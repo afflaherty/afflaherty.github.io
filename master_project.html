@@ -38,11 +38,28 @@
   </nav>
   <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner">
-      <h3>About Me</h3>
-      <p>I am a graduate of Western Carolina University with a <abbr title="Masters in Science">M.S.</abbr> in Applied Mathematics. After coding in MatLab, Mathematica, and R in my graduate classes, I gained an interest in learning more robust programming languages. To do this, I returned to school to obtain an <abbr title="Associates in Science">A.S.</abbr> in computer programming at Trident Technical College along with a number of related certificates. I found that the logical similarities between math and computer science made it easy to pick up the core skills of programming as I learned Java, C#, Python, Powershell, SQL, HTML and CSS, PHP, and JavaScript. In a combination of professional and academic settings, I have worked with a variety of programming-related including, but not limited to, Visual Studio, Eclipse, MySQL Workbench, SQL Server, and Docker. I have used both Visual Studio and the GIT framework in a professional capacity to maintain version control of files.</p>
-      <p>Please use the links in the menu to view my r&#x00E9;sum&#x00E9; and a mix of both school and personal projects that I have worked on.</p>
-      <h3>Contact</h3>
-      <p>Feel free to email me with any questions at <a href="mailto:afflaherty@gmail.com">afflaherty@gmail.com</a></p>
+      <h2>Poetic Variation - Master's Project</h2>
+      <p>My graduate project was analysis of poetry. I used Mathematica and R code to perform factor analysis on various works of poetry to determine if patterns existed for different authors based on parts of speech. The analysis resulted in five factors that contributed towards the works analysed. The first factor contained positive loadings for nouns and prepositions and a negative loading for pronouns, demonstrating that the more nouns present, which are usually preceded by a preposition, implies the diminished use of pronouns. The full explanation of each factor, along with the full code use, can be found in the full write-up.</p>
+      <h3>Example of Mathematica Code</h3>
+      <pre><code>adjective = StringSplit[ToString[Import[
+"\Users\owner\Documents\MATLAB\MASTERS\Parts of Speech\adjective.txt"]], \
+{Whitespace}];
+AdjectiveList =
+Flatten[Table[Intersection[{stringlist[[i]]}, adjective], {i, Length[stringlist]}]]
+Length[AdjectiveList]</code></pre>
+      <h3>Example of R Code</h3>
+      <pre><code>rawd=read.csv(file='C:/Users/owner/Documents/MATLAB/MASTERS/RData.csv')
+d=rawd[,-11]
+cor(d)
+eigen(cor(d))
+plot(eigen(cor(d))$values)
+factanal(d, factors=2)
+
+tmp1=numeric(30)
+for(i in 1:30){
+tmp1[i]=sum(d[i,]*matrix(loadings(m)[,1],ncol=1))}</code></pre>
+      <h3>Download</h3>
+      <p>Download the whole file to read: <a download="files/masters_writeup.pdf">Poetic Variation</a></p>
     </section>
   </div>
   <!-- FOOTER  -->

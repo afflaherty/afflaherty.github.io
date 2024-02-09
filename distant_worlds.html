@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="description" content="Afflaherty.GitHub.io : ">
+  <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+  <title>Adam Flaherty's Portfolio</title>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div id="header_wrap" class="outer">
+    <header class="inner">
+      <!--<a id="forkme_banner" href="https://github.com/afflaherty">View on GitHub</a>-->
+      <h1 id="project_title">Adam Flaherty's Portfolio</h1>
+      <h2 id="project_tagline">A Project Showcase</h2>
+    </header>
+  </div>
+  <!-- MAIN CONTENT -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="files/Adam%20Flaherty%20-%20Resume.pdf" target="_blank">R&#x00E9;sum&#x00E9;/CV</a></li>
+      <li><a href="java_program.html">Eternal Quest (Java)</a></li>
+      <li>
+        <div class="dropdown">
+          <button class="dropbtn">Analysis</button>
+          <div class="dropdownMenu">
+            <a href="master_project.html">Poetic Variation (Master's Project)</a>
+            <a href="mal_scraping.html">Scraping MAL (Personal Project)</a>
+            <a href="distant_worlds.html">Distant Worlds (Personal Project)</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <div id="main_content_wrap" class="outer">
+    <section id="main_content" class="inner">
+      <h2>Distant Worlds - A Small Analysis</h2>
+      <p>Prompted by a comment regarding the Distant World series of music albums from Final Fantasy, I wanted to see if Final Fantasy VI in particular actually needed any more representation. To do this, I went through each album and labeled each track with the series it originated from along with the track length in seconds, cataloging the data in MS Excel. There are a number of tracks that are not attributed to a particular title or are a compilation of music from multiple titles. These tracks have been categorized separately under a general header. The aggregate data is compiled in Table 1.</p>
+      <table>
+        <caption>Table 1: Aggregate Data of Distant Worlds Albums</caption>
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Number of Tracks</th>
+            <th scope="col">Total Time (in seconds)</th>
+          </tr>
+        <tbody>
+          <tr>
+            <th scope="row">Final Fantasy I</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy II</td>
+            <td>0</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy III</td>
+            <td>2</td>
+            <td>431</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy IV</td>
+            <td>4</td>
+            <td>1049</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy V</td>
+            <td>5</td>
+            <td>1159</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy VI</td>
+            <td>11</td>
+            <td>4474</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy VII</td>
+            <td>8</td>
+            <td>2250</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy VII: Advent Children</td>
+            <td>2</td>
+            <td>393</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy VII: Remake</td>
+            <td>4</td>
+            <td>966</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy VIII</td>
+            <td>8</td>
+            <td>2233</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy IX</td>
+            <td>7</td>
+            <td>1720</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy X</td>
+            <td>4</td>
+            <td>1057</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy XI</td>
+            <td>4</td>
+            <td>1270</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy XII</td>
+            <td>3</td>
+            <td>757</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy XIII</td>
+            <td>4</td>
+            <td>893</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy XIV</td>
+            <td>5</td>
+            <td>1623</td>
+          </tr>
+          <tr>
+            <th scope="row">Final Fantasy XV</td>
+            <td>3</td>
+            <td>569</td>
+          </tr>
+          <tr>
+            <th scope="row">General Final Fantasy</td>
+            <td>9</td>
+            <td>2505</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">Mean</th>
+            <td>4.61</td>
+            <td>2.91</td>
+          </tr>
+          <tr>
+            <th scope="row">Standard Deviation (<math>
+                <mi>&#x03C3;</mi>
+              </math>)</th>
+            <td>1297.17</td>
+            <td>1048.46</td>
+          </tr>
+        </tfoot>
+        </thead>
+      </table>
+      <p>It should be noted that while the total time of Final Fantasy VI does qualify as an outlier, it will not be excluded due to the limited size of the data set and the importance of the data point. That does make the outcome of the investigation more interesting considering how much it skews the data in its favor. To visualize the outcome, I converted each value into a <var>z</var>-score in order to see the raw deviation from the respecitve means for each title. This can be seen in Figure 1 and Figure 2.</p>
+      <figure>
+        <div>
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="80 0 510 690" height="690">
+            <g>
+              <path d="M100 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="100" y="40" transform="rotate(315,100,40)">&#x2212;2.00</text>
+              <path d="M140 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="140" y="40" transform="rotate(315,140,40)">&#x2212;1.50</text>
+              <path d="M180 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="180" y="40" transform="rotate(315,180,40)">&#x2212;1.00</text>
+              <path d="M220 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="220" y="40" transform="rotate(315,220,40)">&#x2212;0.50</text>
+              <path d="M260 45 v 640" style="fill:none; stroke-width:2px; stroke:gray;" />
+              <text x="260" y="40" transform="rotate(315,260,40)">0.00</text>
+              <path d="M300 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="300" y="40" transform="rotate(315,300,40)">0.50</text>
+              <path d="M340 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="340" y="40" transform="rotate(315,340,40)">1.00</text>
+              <path d="M380 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="380" y="40" transform="rotate(315,380,40)">1.50</text>
+              <path d="M420 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="420" y="40" transform="rotate(315,420,40)">2.00</text>
+              <path d="M460 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="460" y="40" transform="rotate(315,460,40)">2.50</text>
+            </g>
+            <g>
+              <rect x="132.8" y="55" width="127.2" height="25" style="fill:#53CBFF;" />
+              <text x="137.8" y="72" style="fill:black;">FF I</text>
+              <rect x="132.8" y="90" width="127.2" height="25" style="fill:#53CBFF;" />
+              <text x="137.8" y="107" style="fill:black;">FF II</text>
+              <rect x="188" y="125" width="72" height="25" style="fill:#53CBFF;" />
+              <text x="193" y="142" style="fill:black;">FF III</text>
+              <rect x="243.2" y="160" width="16.8" height="25" style="fill:#53CBFF;" />
+              <text x="248.2" y="177" style="fill:black;">FF IV</text>
+              <rect x="260" y="195" width="10.4" height="25" style="fill:#53CBFF;" />
+              <text x="265.4" y="212" style="fill:black;" text-anchor="end">FF V</text>
+              <rect x="260" y="230" width="176" height="25" style="fill:#53CBFF;" />
+              <text x="431" y="247" style="fill:black;" text-anchor="end">FF VI</text>
+              <rect x="260" y="265" width="93.6" height="25" style="fill:#53CBFF;" />
+              <text x="348.6" y="282" style="fill:black;" text-anchor="end">FF VII</text>
+              <rect x="188" y="300" width="72" height="25" style="fill:#53CBFF;" />
+              <text x="193" y="317" style="fill:black;">FF VII: AC</text>
+              <rect x="243.2" y="335" width="16.8" height="25" style="fill:#53CBFF;" />
+              <text x="248.2" y="352" style="fill:black;">FF VII: RE</text>
+              <rect x="260" y="370" width="93.6" height="25" style="fill:#53CBFF;" />
+              <text x="348.6" y="387" style="fill:black;" text-anchor="end">FF VIII</text>
+              <rect x="260" y="405" width="65.6" height="25" style="fill:#53CBFF;" />
+              <text x="320.6" y="422" style="fill:black;" text-anchor="end">FF IX</text>
+              <rect x="243.2" y="440" width="16.8" height="25" style="fill:#53CBFF;" />
+              <text x="248.2" y="457" style="fill:black;">FF X</text>
+              <rect x="243.2" y="475" width="16.8" height="25" style="fill:#53CBFF;" />
+              <text x="248.2" y="492" style="fill:black;">FF XI</text>
+              <rect x="216" y="510" width="44" height="25" style="fill:#53CBFF;" />
+              <text x="221" y="527" style="fill:black;">FF XII</text>
+              <rect x="243.2" y="545" width="16.8" height="25" style="fill:#53CBFF;" />
+              <text x="248.2" y="562" style="fill:black;">FF XIII</text>
+              <rect x="260" y="580" width="10.4" height="25" style="fill:#53CBFF;" />
+              <text x="265.4" y="597" style="fill:black;" text-anchor="end">FF XIV</text>
+              <rect x="216" y="615" width="44" height="25" style="fill:#53CBFF;" />
+              <text x="221" y="632" style="fill:black;">FF XV</text>
+              <rect x="260" y="650" width="120.8" height="25" style="fill:#53CBFF;" />
+              <text x="375.8" y="667" style="fill:black;" text-anchor="end">General FF</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Figure 1: Deviation in Number of Tracks</figcaption>
+      </figure>
+      <figure>
+        <div>
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="80 0 510 690" height="690">
+            <g>
+              <path d="M140 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="140" y="40" transform="rotate(315,140,40)">&#x2212;1.50</text>
+              <path d="M180 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="180" y="40" transform="rotate(315,180,40)">&#x2212;1.00</text>
+              <path d="M220 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="220" y="40" transform="rotate(315,220,40)">&#x2212;0.50</text>
+              <path d="M260 45 v 640" style="fill:none; stroke-width:2px; stroke:gray;" />
+              <text x="260" y="40" transform="rotate(315,260,40)">0.00</text>
+              <path d="M300 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="300" y="40" transform="rotate(315,300,40)">0.50</text>
+              <path d="M340 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="340" y="40" transform="rotate(315,340,40)">1.00</text>
+              <path d="M380 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="380" y="40" transform="rotate(315,380,40)">1.50</text>
+              <path d="M420 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="420" y="40" transform="rotate(315,420,40)">2.00</text>
+              <path d="M460 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="460" y="40" transform="rotate(315,460,40)">2.50</text>
+              <path d="M500 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="500" y="40" transform="rotate(315,500,40)">3.00</text>
+              <path d="M540 45 v 640" style="fill:none; stroke-width:1px; stroke:gray;" />
+              <text x="540" y="40" transform="rotate(315,540,40)">3.00</text>
+            </g>
+            <g>
+              <rect x="160.8" y="55" width="99.2" height="25" style="fill:#53CBFF;" />
+              <text x="165.8" y="72" style="fill:black;">FF I</text>
+              <rect x="160.8" y="90" width="99.2" height="25" style="fill:#53CBFF;" />
+              <text x="165.8" y="107" style="fill:black;">FF II</text>
+              <rect x="193.6" y="125" width="66.4" height="25" style="fill:#53CBFF;" />
+              <text x="198.6" y="142" style="fill:black;">FF III</text>
+              <rect x="240" y="160" width="20" height="25" style="fill:#53CBFF;" />
+              <text x="245" y="177" style="fill:black;">FF IV</text>
+              <rect x="245.6" y="195" width="14.4" height="25" style="fill:#53CBFF;" />
+              <text x="250.6" y="212" style="fill:black;">FF V</text>
+              <rect x="260" y="230" width="242.4" height="25" style="fill:#53CBFF;" />
+              <text x="497.4" y="247" style="fill:black;" text-anchor="end">FF VI</text>
+              <rect x="260" y="265" width="72.8" height="25" style="fill:#53CBFF;" />
+              <text x="328.2" y="282" style="fill:black;" text-anchor="end">FF VII</text>
+              <rect x="191.2" y="300" width="68.8" height="25" style="fill:#53CBFF;" />
+              <text x="196.2" y="317" style="fill:black;">FF VII: AC</text>
+              <rect x="234.4" y="335" width="25.6" height="25" style="fill:#53CBFF;" />
+              <text x="239.4" y="352" style="fill:black;">FF VII: RE</text>
+              <rect x="260" y="370" width="71.2" height="25" style="fill:#53CBFF;" />
+              <text x="326.2" y="387" style="fill:black;" text-anchor="end">FF VIII</text>
+              <rect x="260" y="405" width="32" height="25" style="fill:#53CBFF;" />
+              <text x="287" y="422" style="fill:black;" text-anchor="end">FF IX</text>
+              <rect x="241.6" y="440" width="18.4" height="25" style="fill:#53CBFF;" />
+              <text x="246.6" y="457" style="fill:black;">FF X</text>
+              <rect x="257.6" y="475" width="2.4" height="25" style="fill:#53CBFF;" />
+              <text x="262.6" y="492" style="fill:black;">FF XI</text>
+              <rect x="218.4" y="510" width="41.6" height="25" style="fill:#53CBFF;" />
+              <text x="223.4" y="527" style="fill:black;">FF XII</text>
+              <rect x="228.8" y="545" width="31.2" height="25" style="fill:#53CBFF;" />
+              <text x="233.8" y="562" style="fill:black;">FF XIII</text>
+              <rect x="260" y="580" width="24.8" height="25" style="fill:#53CBFF;" />
+              <text x="279.8" y="597" style="fill:black;" text-anchor="end">FF XIV</text>
+              <rect x="204.8" y="615" width="55.2" height="25" style="fill:#53CBFF;" />
+              <text x="209.8" y="632" style="fill:black;">FF XV</text>
+              <rect x="260" y="650" width="92" height="25" style="fill:#53CBFF;" />
+              <text x="347" y="667" style="fill:black;" text-anchor="end">General FF</text>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Figure 2: Deviation in Total Time</figcaption>
+      </figure>
+      <p>Based on these deviations, it is clear the Final Fantasy VI has far more representation in the Distant Worlds albums than any other title, including the general category. This is ultimately unsurprising considering <abbr title="Final Fantasy VI">FFVI</abbr> has at least one track on every album and encompasses all three tracks surpassing ten minutes. Obviously, the titles that would need greater representation are the ones that currently don't have any, those being <abbr title="Final Fantasy I">FFI</abbr> and <abbr title="Final Fantasy II">FFII</abbr>. Otherwise, outside of a general celebration of the series, the results point to four titles that Distant Worlds are <abbr>FFVI</abbr> and the Playstation era of games, <abbr title="Final Fantasy VII">FFVII</abbr>, <abbr title="Final Fantasy VIII">FFVIII</abbr>, and <abbr title="Final Fantasy IX">FFIX</abbr>.</p>
+      <p>Two other titles are worth noting, first being <abbr title="Final Fantasy XIV">FFXIV</abbr>, which has positive deviation in both figures but trails behind the frontrunners in terms of track representation, though it is on par with <abbr">FFIX</abbr> for the amount of time devoted to it. The second title is <abbr title="Final Fantasy V">FFV</abbr>, which has positive track representation but negative time representation. This is the only title that seems to be favored in terms of iconic tracks but are too short to compete with the grander pieces in later titles. I imagine something similar would occur if the earlier titles started getting more track representation due to the inherent restrictions on the development of those titles.</p>
+    </section>
+  </div>
+  <!-- FOOTER  -->
+  <div id="footer_wrap" class="outer">
+    <footer class="inner">
+      <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+    </footer>
+  </div>
+</body>
+
+</html>
