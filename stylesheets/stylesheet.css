@@ -120,6 +120,10 @@ a {
 
 a:hover, a:focus {text-decoration: underline;}
 
+var {
+  font-style: italic;
+}
+
 footer a {
   color: #F2F2F2;
   text-decoration: underline;
@@ -236,7 +240,14 @@ hr {
 table {
   border: 1px solid #373737;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
   text-align: left;
+  align
+ }
+
+ tfoot {
+  border-style: double solid solid solid;
  }
 
 th {
@@ -244,11 +255,13 @@ th {
   padding: 10px;
   background: #373737;
   color: #fff;
+  border: 1px solid #fff;
  }
 
 td {
   padding: 10px;
   border: 1px solid #373737;
+  text-align: right;
  }
 
 form {
@@ -297,6 +310,89 @@ nav ul li:hover
 	background-color: black;
 }
 
+button.dropbtn
+{
+  color: white;
+  font-size: 16px;
+  font-family: 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+  border: none;
+  background: none;
+}
+
+div.dropdown
+{
+  position: relative;
+  display: inline-block;
+  padding: 10px 25px;
+}
+
+div.dropdownMenu
+{
+  display: none;
+  position: absolute;
+  background-color: #212121;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+div.dropdownMenu a
+{
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+div.dropdownMenu a:hover
+{
+  background-color: black;
+  text-decoration: underline;
+}
+
+div.dropdown:hover div.dropdownMenu
+{
+  display: block;
+}
+
+div.dropdown:hover .dropbtn
+{
+  background-color: #3e8e41;
+}
+
+.collapseButton
+{
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 24px;
+}
+
+.collapseContent
+{
+  transition: max-height 0.2s ease-out;
+}
+
+div svg
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table caption{
+  font-size: 20px;
+  padding-bottom: 5px;
+}
+
+figure figcaption
+{
+  font-size: 20px;
+  text-align: center;
+}
+
 /*******************************************************************************
 Full-Width Styles
 *******************************************************************************/
@@ -307,7 +403,7 @@ Full-Width Styles
 
 .inner {
   position: relative;
-  max-width: 640px;
+  max-width: 720px;
   padding: 20px 10px;
   margin: 0 auto;
 }
